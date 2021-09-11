@@ -1,28 +1,47 @@
 #!/bin/bash
 
-s=$1
-validity=true
+pass=$1
+while getopts f: option
+do
+case "${option}"
+in
+f )
+ PASS_FILE=${OPTARG}
+ pass=$(head -n 1 $PASS_FILE)
+ ;;
+esac
+done
 
-if [[ !( "${#s}" -ge 10 ) ]]
+
+#if [[ $1 -eq "-f" ]]
+#then	
+#	pass=$(head -n 1 $2)
+#	echo "$pass"	
+#else
+#	pass=$1
+#fi
+validity=true
+echo password entered is $pass
+if [[ !( "${#pass}" -ge 10 ) ]]
 then
     echo password too short , password needs must contain at least 10 characters
 	#exit 1
-	$validity = false
+	validity=false
+	echo calidy status is $validity
 fi
-
-if [[ !("$s" == *[0-9]* )]]
+if [[ !("$pass" == *[0-9]* )]]
 then
 	echo invalid password, password should contain at least 1 digit
 	#exit 1 	
-	$validity = false
-
+	validity=false
+	echo calidy status is $validity
 fi
-
-if [[ !(("$s" == *[A-Z]*) && ("$s" == *[a-z]*))]]
+if [[ !(("$pass" == *[A-Z]*) && ("$pass" == *[a-z]*))]]
 then
 	echo Invalid password ,password should include both the small and capital case letters.
 	#exit 1
-	$validity = false
+	validity=false
+	echo calidy status is $validity
 fi
 if [ $validity = false ]
 then
