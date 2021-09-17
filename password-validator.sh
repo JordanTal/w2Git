@@ -1,7 +1,7 @@
 #!/bin/bash
 
 s=$1
-validity="true"
+validity=true
 
 if [[ !( "${#s}" -ge 10 ) ]] 
  then
