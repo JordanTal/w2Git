@@ -1,33 +1,30 @@
 #!/bin/bash
 
 s=$1
-validity=true
+validity="true"
 
-if [[ !( "${#s}" -ge 10 ) ]]
-then
-    echo password too short , password needs must contain at least 10 characters
-	#exit 1
-	$validity = false
+if [[ !( "${#s}" -ge 10 ) ]] 
+ then
+    echo "$(tput setaf 1)password too short , password needs must contain at least 10 characters"
+	validity=false
 fi
 
-if [[ !("$s" == *[0-9]* )]]
-then
-	echo invalid password, password should contain at least 1 digit
-	#exit 1 	
-	$validity = false
+if [[ !("$s" == *[0-9]* )]] 
+ then
+	echo "$(tput setaf 1)invalid password, password should contain at least 1 digit"
+	validity=false
 
 fi
 
-if [[ !(("$s" == *[A-Z]*) && ("$s" == *[a-z]*))]]
-then
-	echo Invalid password ,password should include both the small and capital case letters.
-	#exit 1
-	$validity = false
+if [[ !(("$s" == *[A-Z]*) && ("$s" == *[a-z]*))]] 
+ then
+	echo "$(tput setaf 1)Invalid password ,password should include both the small and capital case letters."
+	validity=false
 fi
 if [ $validity = false ]
-then
+ then
 	exit 1
 else
-	echo "password is valid (-: thanks"
+	echo "$(tput setaf 2)Password is valid (-: thanks"
 fi
 
